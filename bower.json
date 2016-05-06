@@ -1,0 +1,20 @@
+{
+  "name": "SharingIsCaring",
+  "authors": [
+    "Spreadyy <sandro@012345.ch>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "012345.ch",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  }
+}
