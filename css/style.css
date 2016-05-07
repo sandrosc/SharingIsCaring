@@ -18,6 +18,7 @@ section#contentBox {
 
 header {
     display: flex;
+    margin-top: 4px;
 }
 
 h1.logo {
@@ -27,12 +28,11 @@ h1.logo {
     font-weight: 300;
     line-height: 34px;
     font-size: 30px;
-    margin: 10px 0;
+    margin: 8px 0;
     flex: 0 1 auto;
 }
 
 header > nav {
-    margin-top: 4px;
     flex: 0 1 auto;
 }
 
