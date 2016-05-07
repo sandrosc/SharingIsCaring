@@ -18,21 +18,36 @@ section#contentBox {
 
 header {
     display: flex;
+    margin-top: 4px;
 }
 
-h1.logo {
+header > .logo {
     color: #B20000;
     display: inline-block;
     font-family: 'Open Sans',sans-serif;
     font-weight: 300;
     line-height: 34px;
     font-size: 30px;
-    margin: 10px 0;
+    margin: 8px 0;
     flex: 0 1 auto;
 }
 
+header > .search {
+   flex: 1 1 auto;
+   box-sizing: border-box;
+   padding: 0 20px;
+   margin: 0 20px;
+}
+
+header > .search > paper-input-container {
+    height: 20px;
+    --paper-input-container-color: #B20000;
+    --paper-input-container-focus-color: #B20000;
+    --paper-input-container-input-color: #B20000;
+    
+}
+
 header > nav {
-    margin-top: 4px;
     flex: 0 1 auto;
 }
 
@@ -48,10 +63,26 @@ header > nav > a:first-child {
     margin-left: 0;
 }
 
+header .coolBox {
+    position: relative;
+}
+
+header .coolBox.active::after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 5px;
+    background: white;
+    z-index: 1000;
+}
+
 section#main {
     width: 100%;
     float: left;
     display: flex;
+    position: relative;
 }
 
 section#main > section {
@@ -96,6 +127,14 @@ nav.categories > a:hover {
 
 nav.categories > a:last-child {
     border-bottom: none;
+}
+
+footer {
+    float: left;
+    width: 100%;
+    margin: 30px 0px;
+    padding: 16px;
+    box-sizing: border-box;
 }
 
 .coolBox {

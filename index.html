@@ -4,9 +4,15 @@
 <head>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href='css/style.css' rel='stylesheet' type='text/css'>
+
     <meta charset="utf-8" />
+
     <title>Sharing is Caring</title>
+
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
 </head>
 
 <body>
@@ -14,6 +20,13 @@
         <section id="contentBox">
             <header>
                 <h1 class="logo"><a href='index.html'>Sharing is Caring</a></h1>
+                <section class="search coolBox">
+                    <paper-input-container no-label-float>
+                        <iron-icon icon="search" prefix></iron-icon>
+                        <label>Suche</label>
+                        <input is="iron-input">
+                    </paper-input-container>
+                </section>
                 <nav>
                     <a class="coolBox" href="lala.html">test</a>
                     <a class="coolBox" href="lala.html">test3</a>
