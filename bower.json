@@ -19,6 +19,7 @@
     "iron-icons": "PolymerElements/iron-icons#^1.0.0",
     "iron-pages": "PolymerElements/iron-pages#^1.0.0",
     "paper-input": "PolymerElements/paper-input#^1.0.0",
-    "paper-menu": "PolymerElements/paper-menu#^1.0.0"
+    "paper-menu": "PolymerElements/paper-menu#^1.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^1.0.0"
   }
 }
