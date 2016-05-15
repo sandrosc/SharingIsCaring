@@ -9,6 +9,17 @@
 
     <title>Sharing is Caring</title>
 
+    <!-->Getting History :D</!-->
+    <script>
+        (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
     <link rel="import" href="bower_components/iron-menu-behavior/iron-menu-behavior.html">
