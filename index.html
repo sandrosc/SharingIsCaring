@@ -9,15 +9,17 @@
 
     <title>Sharing is Caring</title>
 
-    <!-->Getting History :D</!-->
+    <!--Getting History :D-->
     <script>
         (function(){
         var redirect = sessionStorage.redirect;
+        console.log(redirect);
         delete sessionStorage.redirect;
         if (redirect && redirect != location.href) {
           history.replaceState(null, null, redirect);
         }
       })();
+        
     </script>
 
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
