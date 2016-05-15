@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link href='/SharingIsCaring/css/style.css' rel='stylesheet' type='text/css'>
+
+    <meta charset="utf-8" />
+
+    <title>Sharing is Caring</title>
+
+    <script>
+        (function(){
+        var redirect = sessionStorage.redirect;
+        console.log(redirect);
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+
+    <script src="/SharingIsCaring/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="/SharingIsCaring/routing.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/iron-menu-behavior/iron-menu-behavior.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/iron-selector/iron-selector.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/paper-ripple/paper-ripple.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/paper-input/paper-input.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/social-icons.html">
+    <link rel="import" href="/SharingIsCaring/css/custom-style.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/google-map/google-map.html">
+</head>
+
+<body unresolved>
+    <section id="content">
+        <section id="contentBox">
+            <header>
+                <h1 class="logo"><a href='index.html'>Sharing is Caring</a></h1>
+                <section class="search coolBox">
+                    <paper-input-container id="search" no-label-float>
+                        <iron-icon icon="search" prefix></iron-icon>
+                        <label>Suche</label>
+                        <input is="iron-input">
+                    </paper-input-container>
+                </section>
+                <nav>
+                    <a class="coolBox" href="/SharingIsCaring/share">
+                        <paper-ripple></paper-ripple>
+                        <iron-icon icon="icons:loyalty"></iron-icon>
+                        Teilen
+                    </a>
+                    <a class="coolBox" href="/SharingIsCaring/login">
+                        <paper-ripple></paper-ripple>
+                        <iron-icon icon="social:person"></iron-icon>
+                        Einloggen
+                    </a>
+                </nav>
+            </header>
+            <section id="main" class="coolBox">
+                <section id="left">
+                    <simple-menu>
+                        <iron-selector attr-for-selected="category">
+                            <a href="/SharingIsCaring/category/1" category="1">
+                                <paper-ripple></paper-ripple>Werkzeuge & Gartenarbeit</a>
+                            <a href="/SharingIsCaring/category/2" category="2">
+                                <paper-ripple></paper-ripple>Sport & Draussen</a>
+                            <a href="/SharingIsCaring/category/3" category="3">
+                                <paper-ripple></paper-ripple>Partys & Events</a>
+                            <a href="/SharingIsCaring/category/4" category="4">
+                                <paper-ripple></paper-ripple>Kleider & Accessories</a>
+                            <a href="/SharingIsCaring/category/5" category="5">
+                                <paper-ripple></paper-ripple>Dinge für Kinder & Babys</a>
+                            <a href="/SharingIsCaring/category/6" category="6">
+                                <paper-ripple></paper-ripple>Elektronisches</a>
+                            <a href="/SharingIsCaring/category/7" category="7">
+                                <paper-ripple></paper-ripple>Filme, Musik, Bücher & Games</a>
+                            <a href="/SharingIsCaring/category/8" category="8">
+                                <paper-ripple></paper-ripple>Motorfahrzeuge</a>
+                            <a href="/SharingIsCaring/category/9" category="9">
+                                <paper-ripple></paper-ripple>Kunst</a>
+                            <a href="/SharingIsCaring/category/10" category="10">
+                                <paper-ripple></paper-ripple>Haushaltsgeräte</a>
+                            <a href="/SharingIsCaring/category/11" category="11">
+                                <paper-ripple></paper-ripple>Büro</a>
+                            <a href="/SharingIsCaring/category/12" category="12">
+                                <paper-ripple></paper-ripple>Räume und Veranstaltungsorte</a>
+                            <a href="/SharingIsCaring/category/99" category="99">
+                                <paper-ripple></paper-ripple>Anderes</a>
+                        </iron-selector>
+                    </simple-menu>
+                </section>
+                <section id="right">
+                    <style>
+                        google-map {
+                            height: 600px;
+                        }
+                    </style>
+                    <google-map latitude="46.7912769" longitude="8.3022674" zoom="8"></google-map>
+
+                    <p>This is a paragraph.</p>
+
+                </section>
+            </section>
+            <footer class="coolBox">
+                (C)
+            </footer>
+        </section>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script>
+        $('paper-input-container').keypress(function(event){
+            if(event.keyCode == 13){
+                page('/search/' + encodeURIComponent($('paper-input-container input').val()));
+            }
+        });
+    </script>
+</body>
+
+</html>
