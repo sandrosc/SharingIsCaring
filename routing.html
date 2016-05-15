@@ -8,18 +8,27 @@
       app.route = 'all';
     });
     page('/category/*', function () {
-      //app.route = 'category';
-      alert("whatup");
+      //app.route = '/category/id';
     });
-    page('/active', function () {
-      app.route = 'active';
+    page('/search/*', function () {
+      //app.route = '/category/id';
     });
-    page('/completed', function () {
-      app.route = 'completed';
+    page('/share', function () {
+      //app.route = '/category/id';
     });
+    page('/login', function () {
+      //app.route = '/category/id';
+    });
+    
+    //page('/active', function () {
+    //  app.route = 'active';
+    //});
+    //page('/completed', function () {
+    //  app.route = 'completed';
+    //});
     // add #! before urls
     page({
-      hashbang: true
+      hashbang: false
     });
   });
 </script>

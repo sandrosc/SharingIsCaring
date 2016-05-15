@@ -3,7 +3,7 @@
 
 <head>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
-    <link href='css/style.css' rel='stylesheet' type='text/css'>
+    <link href='/css/style.css' rel='stylesheet' type='text/css'>
 
     <meta charset="utf-8" />
 
@@ -18,20 +18,19 @@
           history.replaceState(null, null, redirect);
         }
       })();
-        
     </script>
 
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="routing.html">
-    <link rel="import" href="bower_components/iron-menu-behavior/iron-menu-behavior.html">
-    <link rel="import" href="bower_components/iron-selector/iron-selector.html">
-    <link rel="import" href="bower_components/paper-ripple/paper-ripple.html">
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
-    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
-    <link rel="import" href="bower_components/iron-icons/social-icons.html">
-    <link rel="import" href="css/custom-style.html">
-    <link rel="import" href="bower_components/google-map/google-map.html">
+    <link rel="import" href="/routing.html">
+    <link rel="import" href="/bower_components/iron-menu-behavior/iron-menu-behavior.html">
+    <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+    <link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
+    <link rel="import" href="/bower_components/paper-input/paper-input.html">
+    <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="/bower_components/iron-icons/social-icons.html">
+    <link rel="import" href="/css/custom-style.html">
+    <link rel="import" href="/bower_components/google-map/google-map.html">
 </head>
 
 <body unresolved>
@@ -40,19 +39,19 @@
             <header>
                 <h1 class="logo"><a href='index.html'>Sharing is Caring</a></h1>
                 <section class="search coolBox">
-                    <paper-input-container no-label-float>
+                    <paper-input-container id="search" no-label-float>
                         <iron-icon icon="search" prefix></iron-icon>
                         <label>Suche</label>
                         <input is="iron-input">
                     </paper-input-container>
                 </section>
                 <nav>
-                    <a class="coolBox" href="#share">
+                    <a class="coolBox" href="/share">
                         <paper-ripple></paper-ripple>
                         <iron-icon icon="icons:loyalty"></iron-icon>
                         Teilen
                     </a>
-                    <a class="coolBox" href="#login">
+                    <a class="coolBox" href="/login">
                         <paper-ripple></paper-ripple>
                         <iron-icon icon="social:person"></iron-icon>
                         Einloggen
@@ -63,31 +62,31 @@
                 <section id="left">
                     <simple-menu>
                         <iron-selector attr-for-selected="category">
-                            <a href="#category=1" category="1">
+                            <a href="/category/1" category="1">
                                 <paper-ripple></paper-ripple>Werkzeuge & Gartenarbeit</a>
-                            <a href="#category=2" category="2">
+                            <a href="/category/2" category="2">
                                 <paper-ripple></paper-ripple>Sport & Draussen</a>
-                            <a href="#category=3" category="3">
+                            <a href="/category/3" category="3">
                                 <paper-ripple></paper-ripple>Partys & Events</a>
-                            <a href="#category=4" category="4">
+                            <a href="/category/4" category="4">
                                 <paper-ripple></paper-ripple>Kleider & Accessories</a>
-                            <a href="#category=5" category="5">
+                            <a href="/category/5" category="5">
                                 <paper-ripple></paper-ripple>Dinge für Kinder & Babys</a>
                             <a href="/category/6" category="6">
                                 <paper-ripple></paper-ripple>Elektronisches</a>
-                            <a href="#category=7" category="7">
+                            <a href="/category/7" category="7">
                                 <paper-ripple></paper-ripple>Filme, Musik, Bücher & Games</a>
-                            <a href="#category=8" category="8">
+                            <a href="/category/8" category="8">
                                 <paper-ripple></paper-ripple>Motorfahrzeuge</a>
-                            <a href="#category=9" category="9">
+                            <a href="/category/9" category="9">
                                 <paper-ripple></paper-ripple>Kunst</a>
-                            <a href="#category=10" category="10">
+                            <a href="/category/10" category="10">
                                 <paper-ripple></paper-ripple>Haushaltsgeräte</a>
-                            <a href="#category=11" category="11">
+                            <a href="/category/11" category="11">
                                 <paper-ripple></paper-ripple>Büro</a>
-                            <a href="#category=12" category="12">
+                            <a href="/category/12" category="12">
                                 <paper-ripple></paper-ripple>Räume und Veranstaltungsorte</a>
-                            <a href="#category=99" category="99">
+                            <a href="/category/99" category="99">
                                 <paper-ripple></paper-ripple>Anderes</a>
                         </iron-selector>
                     </simple-menu>
@@ -109,6 +108,14 @@
             </footer>
         </section>
     </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script>
+        $('paper-input-container').keypress(function(event){
+            if(event.keyCode == 13){
+                page('/search/' + encodeURIComponent($('paper-input-container input').val()));
+            }
+        });
+    </script>
 </body>
 
 </html>
