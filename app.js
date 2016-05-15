@@ -5,17 +5,17 @@ var app = express();
 app.use(express.static(__dirname));
 
 //return index to pages
-app.get('/category/*', function (req, res) {
-    res.sendFile('index.html', { root: __dirname });
+app.get('/SharingIsCaring/category/*', function (req, res) {
+    res.sendFile('/SharingIsCaring/index.html', { root: __dirname });
 });
-app.get('/search/*', function (req, res) {
-    res.sendFile('index.html', { root: __dirname });
+app.get('/SharingIsCaring/search/*', function (req, res) {
+    res.sendFile('/SharingIsCaring/index.html', { root: __dirname });
 });
-app.get('/share', function (req, res) {
-    res.sendFile('index.html', { root: __dirname });
+app.get('/SharingIsCaring/share', function (req, res) {
+    res.sendFile('/SharingIsCaring/index.html', { root: __dirname });
 });
-app.get('/login', function (req, res) {
-    res.sendFile('index.html', { root: __dirname });
+app.get('/SharingIsCaring/login', function (req, res) {
+    res.sendFile('/SharingIsCaring/index.html', { root: __dirname });
 });
 
 app.listen(3000, function () {
