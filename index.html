@@ -34,6 +34,7 @@
     <link rel="import" href="/SharingIsCaring/bower_components/paper-item/paper-item.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-listbox/paper-listbox.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="/SharingIsCaring/elements/imgur-upload/imgur-upload.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-button/paper-button.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/iron-icons.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/social-icons.html">
@@ -143,7 +144,7 @@
                                 
                                 <paper-input id="titleInput" label="Titel"></paper-input>
                                 <paper-textarea id="descInput" label="Beschreibung"></paper-textarea>
-                                <vaadin-upload id="imgInput" label="Bild"></vaadin-upload>
+                                <imgur-upload clientID="fb591f0a796aa0d" auto></imgur-upload>
                                 <paper-dropdown-menu horizontal-align="left" id="categoryInput" label="Kategorie">
                                     <paper-listbox class="dropdown-content">
                                         <template is="dom-repeat" items="[[categories]]" as="category">
