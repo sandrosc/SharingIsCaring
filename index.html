@@ -25,78 +25,91 @@
     <link rel="import" href="/SharingIsCaring/routing.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-menu-behavior/iron-menu-behavior.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-pages/iron-pages.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/iron-list/iron-list.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-selector/iron-selector.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-ripple/paper-ripple.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-input/paper-input.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/paper-input/paper-textarea.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/vaadin-upload/vaadin-upload.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/paper-item/paper-item.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/paper-listbox/paper-listbox.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-button/paper-button.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/iron-icons.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/social-icons.html">
-    <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/social-icons.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/iron-image/iron-image.html">
     <link rel="import" href="/SharingIsCaring/css/custom-style.html">
     <link rel="import" href="/SharingIsCaring/bower_components/firebase-element/firebase-auth.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/firebase-element/firebase-collection.html">
     <link rel="import" href="/SharingIsCaring/bower_components/google-map/google-map.html">
 </head>
 
 <body unresolved>
     <section id="content">
         <section id="contentBox">
-            <header>
-                <h1 class="logo"><a href='index.html'>Sharing is Caring</a></h1>
-                <section class="search coolBox">
-                    <paper-input-container id="search" no-label-float>
-                        <iron-icon icon="search" prefix></iron-icon>
-                        <label>Suche</label>
-                        <input is="iron-input">
-                    </paper-input-container>
-                </section>
-                <nav>
-                    <a class="coolBox" href="/SharingIsCaring/share">
-                        <paper-ripple></paper-ripple>
-                        <iron-icon icon="icons:loyalty"></iron-icon>
-                        Teilen
-                    </a>
-                    <a class="coolBox" href="/SharingIsCaring/login">
-                        <paper-ripple></paper-ripple>
-                        <iron-icon icon="social:person"></iron-icon>
-                        Einloggen
-                    </a>
-                </nav>
-            </header>
-            <section id="main" class="coolBox">
-                <section id="left">
-                    <simple-menu>
-                        <iron-selector attr-for-selected="category">
-                            <a href="/SharingIsCaring/category/1" category="1">
-                                <paper-ripple></paper-ripple>Werkzeuge & Gartenarbeit</a>
-                            <a href="/SharingIsCaring/category/2" category="2">
-                                <paper-ripple></paper-ripple>Sport & Draussen</a>
-                            <a href="/SharingIsCaring/category/3" category="3">
-                                <paper-ripple></paper-ripple>Partys & Events</a>
-                            <a href="/SharingIsCaring/category/4" category="4">
-                                <paper-ripple></paper-ripple>Kleider & Accessories</a>
-                            <a href="/SharingIsCaring/category/5" category="5">
-                                <paper-ripple></paper-ripple>Dinge für Kinder & Babys</a>
-                            <a href="/SharingIsCaring/category/6" category="6">
-                                <paper-ripple></paper-ripple>Elektronisches</a>
-                            <a href="/SharingIsCaring/category/7" category="7">
-                                <paper-ripple></paper-ripple>Filme, Musik, Bücher & Games</a>
-                            <a href="/SharingIsCaring/category/8" category="8">
-                                <paper-ripple></paper-ripple>Motorfahrzeuge</a>
-                            <a href="/SharingIsCaring/category/9" category="9">
-                                <paper-ripple></paper-ripple>Kunst</a>
-                            <a href="/SharingIsCaring/category/10" category="10">
-                                <paper-ripple></paper-ripple>Haushaltsgeräte</a>
-                            <a href="/SharingIsCaring/category/11" category="11">
-                                <paper-ripple></paper-ripple>Büro</a>
-                            <a href="/SharingIsCaring/category/12" category="12">
-                                <paper-ripple></paper-ripple>Räume und Veranstaltungsorte</a>
-                            <a href="/SharingIsCaring/category/99" category="99">
-                                <paper-ripple></paper-ripple>Anderes</a>
-                        </iron-selector>
-                    </simple-menu>
-                </section>
-                <section id="right">
-                    <template is="dom-bind" id="app">
+            <template is="dom-bind" id="app">
+                <firebase-collection data="{{categories}}" location="https://sharingiscaring.firebaseio.com/categories"></firebase-collection>
+                <header>
+                    <h1 class="logo"><a href='index.html'>Sharing is Caring</a></h1>
+                    <section class="search coolBox">
+                        <paper-input-container id="search" no-label-float>
+                            <iron-icon icon="search" prefix></iron-icon>
+                            <label>Suche</label>
+                            <input is="iron-input">
+                        </paper-input-container>
+                    </section>
+                    <nav>
+                        <a class="coolBox" href="/SharingIsCaring/share">
+                            <paper-ripple></paper-ripple>
+                            <iron-icon icon="icons:loyalty"></iron-icon>
+                            Teilen
+                        </a>
+                        <a class="coolBox" href="/SharingIsCaring/login" hidden$="{{userIsLoggedIn(statusKnown, user)}}">
+                            <paper-ripple></paper-ripple>
+                            <iron-icon icon="icons:account-circle"></iron-icon>
+                            Einloggen
+                        </a>
+                        <a class="coolBox" href="/SharingIsCaring/user" hidden$="{{userIsLoggedOut(statusKnown, user)}}">
+                            <paper-ripple></paper-ripple>
+                            <iron-icon icon="icons:account-circle"></iron-icon>
+                            User
+                        </a>
+                    </nav>
+                </header>
+                <section id="main" class="coolBox">
+                    <section id="left">
+                        <simple-menu>
+                            <iron-selector attr-for-selected="category">
+                                <a href="/SharingIsCaring/category/1" category="1">
+                                    <paper-ripple></paper-ripple>Werkzeuge & Gartenarbeit</a>
+                                <a href="/SharingIsCaring/category/2" category="2">
+                                    <paper-ripple></paper-ripple>Sport & Draussen</a>
+                                <a href="/SharingIsCaring/category/3" category="3">
+                                    <paper-ripple></paper-ripple>Partys & Events</a>
+                                <a href="/SharingIsCaring/category/4" category="4">
+                                    <paper-ripple></paper-ripple>Kleider & Accessories</a>
+                                <a href="/SharingIsCaring/category/5" category="5">
+                                    <paper-ripple></paper-ripple>Dinge für Kinder & Babys</a>
+                                <a href="/SharingIsCaring/category/6" category="6">
+                                    <paper-ripple></paper-ripple>Elektronisches</a>
+                                <a href="/SharingIsCaring/category/7" category="7">
+                                    <paper-ripple></paper-ripple>Filme, Musik, Bücher & Games</a>
+                                <a href="/SharingIsCaring/category/8" category="8">
+                                    <paper-ripple></paper-ripple>Motorfahrzeuge</a>
+                                <a href="/SharingIsCaring/category/9" category="9">
+                                    <paper-ripple></paper-ripple>Kunst</a>
+                                <a href="/SharingIsCaring/category/10" category="10">
+                                    <paper-ripple></paper-ripple>Haushaltsgeräte</a>
+                                <a href="/SharingIsCaring/category/11" category="11">
+                                    <paper-ripple></paper-ripple>Büro</a>
+                                <a href="/SharingIsCaring/category/12" category="12">
+                                    <paper-ripple></paper-ripple>Räume und Veranstaltungsorte</a>
+                                <a href="/SharingIsCaring/category/99" category="99">
+                                    <paper-ripple></paper-ripple>Anderes</a>
+                            </iron-selector>
+                        </simple-menu>
+                    </section>
+                    <section id="right">
                         <iron-pages attr-for-selected="data-route" selected="{{route}}">
                             <section data-route="home">
                                 Home
@@ -104,24 +117,45 @@
                             <section data-route="login">
                                 <!-- example: https://github.com/GoogleWebComponents/firebase-element/blob/master/demo/x-login.html#L72 -->
                                 <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://sharingiscaring.firebaseio.com" provider="google"></firebase-auth>
-                                <paper-button class="login-button" on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">
-                                    <iron-icon src="/SharingIsCaring/img/googleLogin.png"></iron-icon>
-                                    Login
+                                <div hidden$="{{userIsLoggedIn(statusKnown, user)}}">
+                                    <p>Login mit Google:</p>
+                                    <paper-button raised class="login-button" on-tap="login">
+                                        <iron-icon src="/SharingIsCaring/img/googleLogin.png"></iron-icon>
+                                        Login
+                                    </paper-button>
+                                </div>
+                                <div hidden$="{{userIsLoggedOut(statusKnown, user)}}">
+                                    Sie wurden erfolgreich eingeloggt. Willkommen, [[user.google.displayName]].
+                                    <iron-image class="login-image" src="[[user.google.profileImageURL]]" sizing="contain"></iron-image>
+                                </div>
+                            </section>
+                            <section data-route="user">
+                                <p>Name: [[user.google.displayName]]</p>
+                                <paper-button raised class="logout-button" on-tap="logout">
+                                    <iron-icon icon="icons:lock"></iron-icon>
+                                    Logout
                                 </paper-button>
-                                <script>
-                                    /*app.login = function(){
-                                        var params;
-                                        try {
-                                            params = JSON.parse(this.params);
-                                        } catch (e) {
-                                            params = null;
-                                        }
-                                        this.$.firebaseLogin.login(params);
-                                    }*/
-                                </script>
                             </section>
                             <section data-route="share">
-                                Share
+                                <firebase-collection data="{{user.items}}" location="https://sharingiscaring.firebaseio.com"></firebase-collection>
+                                
+                                <p>Teile etwas:</p>
+                                
+                                <paper-input id="titleInput" label="Titel"></paper-input>
+                                <paper-textarea id="descInput" label="Beschreibung"></paper-textarea>
+                                <vaadin-upload id="imgInput" label="Bild"></vaadin-upload>
+                                <paper-dropdown-menu horizontal-align="left" id="categoryInput" label="Kategorie">
+                                    <paper-listbox class="dropdown-content">
+                                        <template is="dom-repeat" items="[[categories]]" as="category">
+                                            <paper-item>[[category.value]]</paper-item>
+                                        </template>
+                                    </paper-listbox>
+                                </paper-dropdown-menu>
+                                <template is="dom-repeat"
+                                            items="{{user.items}}"
+                                            as="item">
+                                    <div>{{item.Title}}</div>
+                                </template>
                             </section>
                             <section data-route="search">
                                 Search
@@ -133,28 +167,22 @@
                                  Category
                             </section>
                         </iron-pages>
-                    </template>
-                    
-                    
-                                <script>
-                                    
-                                </script>
-                    
-                    
-                    <style>
-                        google-map {
-                            height: 600px;
-                        }
-                    </style>
-                    <google-map latitude="46.7912769" longitude="8.3022674" zoom="8"></google-map>
+                        <!--
+                        <style>
+                            google-map {
+                                height: 600px;
+                            }
+                        </style>
+                        <google-map latitude="46.7912769" longitude="8.3022674" zoom="8"></google-map>
 
-                    <p>This is a paragraph.</p>
-
+                        <p>This is a paragraph.</p>
+                        -->
+                    </section>
                 </section>
-            </section>
-            <footer class="coolBox">
-                (C)
-            </footer>
+                <footer class="coolBox">
+                    (C)
+                </footer>
+            </template>
         </section>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
