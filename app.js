@@ -17,6 +17,9 @@ app.get('/SharingIsCaring/share', function (req, res) {
 app.get('/SharingIsCaring/login', function (req, res) {
     res.sendFile('/SharingIsCaring/index.html', { root: __dirname });
 });
+app.get('/SharingIsCaring/user', function (req, res) {
+    res.sendFile('/SharingIsCaring/index.html', { root: __dirname });
+});
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
