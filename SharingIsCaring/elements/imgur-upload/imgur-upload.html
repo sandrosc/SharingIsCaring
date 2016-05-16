@@ -1,0 +1,185 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<!--
+Element that will upload any image that Imgur can handle.
+
+Example:
+
+    <imgur-upload clientId="123456"></imgur-upload>
+
+@element imgur-upload
+@blurb Element that will upload any image that Imgur can handle.
+@status beta
+@homepage http://ianbibby.github.io/imgur-upload
+@demo
+-->
+<dom-module id="imgur-upload">
+
+  <style>
+    :host {
+      display: block;
+      color: red;
+    }
+  </style>
+
+  <template>
+    <iron-ajax
+      id="ironAjax"
+      url="https://api.imgur.com/3/upload.json"
+      headers="{{headers}}"
+      progress="{{progress}}"
+      last-response="{{response}}"
+      body="{{file}}"
+      method="POST"
+      contentType="multipart/form-data"
+      handle-as="json"
+      on-response="handleResponse"
+      on-core-error="{{handleError}}">
+    </iron-ajax>
+    <paper-input-container label="Input label">
+      <input id="inputFile" on-change="fileChanged" type="file"/>
+    </paper-input>
+  </template>
+  <script>
+    Polymer({
+      is: 'imgur-upload',
+
+      properties: {
+        /**
+         * Whether the current file is currently loading.
+         */
+        loading: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+
+        /**
+         * The progress of the current file thats loading.
+         *
+         * {loaded: number, total: number, lengthComputable: boolean}
+         */
+        progress: {
+          type: Object,
+          reflectToAttribute: true
+        },
+
+        /**
+         * `clientId` is the Client ID provided to you by Imgur.
+         */
+        clientId: {
+          type: String,
+          value: null,
+          reflectToAttribute: true
+        },
+
+        /**
+         * `file` is the selected File object to be uploaded and must be
+         * a supported image type.
+         */
+        file: {
+          type: Object,
+          notify: true,
+          observer: 'fileChanged',
+          value: function () {
+            return {};
+          }
+        },
+
+        /**
+         * When `auto` is true, the image will be uploaded immediately.
+         */
+        auto: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: false
+        },
+
+        headers: {},
+        response: {},
+
+      },
+
+      /**
+       * The `fileChanged` method watches for changes to the `file` property.
+       */
+      fileChanged: function(e) {
+        this.file =  document.getElementById("inputFile");
+        console.log(this.file);
+        if (this.auto) {
+          this.upload();
+        }
+      },
+
+      /**
+       * The `upload` method will upload the chosen image to Imgur.
+       *
+       * @method upload
+       */
+      upload: function () {
+        if (!this.file || !(this.file.type.indexOf("image/") == 0)) {
+          this.fire('imgur-upload-invalid-file-type', { fileType: this.file.type });
+          return null;
+        }
+
+        var fd = new FormData();
+        fd.append("image", this.file);
+
+        this.body = fd;
+        if (this.clientId) {
+          this.headers = { "Authorization": "Client-ID " + this.clientId };
+        }
+        this.$.ironAjax.generateRequest();
+        this.fire('imgur-upload-started', { file: this.file.name });
+      },
+
+      handleResponse: function(e) {
+        this.fire('imgur-upload-success', this.response.data);
+        alert(this.response.data);
+      },
+
+      handleError: function(e) {
+        var response = e.detail.response;
+        this.error = JSON.parse(response.substring(response.indexOf('{'), response.length));
+        this.fire('imgur-upload-failure', this.error);
+      }
+
+      /**
+       * The `imgur-upload-started` event is fired whenever the
+       * image upload has started.
+       *
+       * @event imgur-upload-started
+       * @param {Object} detail
+       *   @param {string} detail.file File name of the uploading file.
+       */
+
+      /**
+       * The `imgur-upload-success` event is fired whenever the
+       * image is successfully uploaded to Imgur.
+       *
+       * @event imgur-upload-success
+       * @param {Object} detail
+       *     @param {string} detail.deletehash Imgur deletehash
+       *    @param {integer} height Image height
+       *     @param {integer} width Image width
+       *     @param {integer} size Image size
+       *     @param {string} id Imgur id for the image
+       *     @param {string} link Imgur URL for the image
+       *     @param {string} type Image type
+       */
+
+      /**
+       * The `imgur-upload-failure` event is fired whenever the
+       * image failed to be uploaded to Imgur.
+       *
+       * @event imgur-upload-failure
+       * @param {Object} detail
+       *   @param {string} detail.data Hash containing error message and more
+       *   @param {string} detail.status HTTP status code
+       *   @param {string} detail.success Will always be false
+       */
+    });
+  </script>
+</dom-module>
