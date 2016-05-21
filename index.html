@@ -40,8 +40,7 @@
     <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/social-icons.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-image/iron-image.html">
     <link rel="import" href="/SharingIsCaring/css/custom-style.html">
-    <link rel="import" href="/SharingIsCaring/bower_components/firebase-element/firebase-auth.html">
-    <link rel="import" href="/SharingIsCaring/bower_components/firebase-element/firebase-collection.html">
+    <link rel="import" href="/SharingIsCaring/bower_components/polymerfire/polymerfire.html">
     <link rel="import" href="/SharingIsCaring/bower_components/google-map/google-map.html">
 </head>
 
@@ -49,9 +48,13 @@
     <section id="content">
         <section id="contentBox">
             <template is="dom-bind" id="app">
-                <firebase-collection data="{{categories}}" location="https://sharingiscaring.firebaseio.com/categories"></firebase-collection>
+                <firebase-app auth-domain="sharingiscaring-1313.firebaseapp.com"
+                    database-url="sharingiscaring-1313.firebaseio.com/"
+                    api-key="AIzaSyDTP-eiQezleFsV2WddFBAhF_WEzx_8v_g"><!--TODO auth and database-->
+                </firebase-app>
+                <firebase-collection data="{{categories}}" location="https://sharingiscaring-1313.firebaseio.com/categories"></firebase-collection>
                 <header>
-                    <h1 class="logo"><a href='index.html'>Sharing is Caring</a></h1>
+                    <h1 class="logo"><a href='/SharingIsCaring'>Sharing is Caring</a></h1>
                     <section class="search coolBox">
                         <paper-input-container id="search" no-label-float>
                             <iron-icon icon="search" prefix></iron-icon>
@@ -117,7 +120,7 @@
                             </section>
                             <section data-route="login">
                                 <!-- example: https://github.com/GoogleWebComponents/firebase-element/blob/master/demo/x-login.html#L72 -->
-                                <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://sharingiscaring.firebaseio.com" provider="google"></firebase-auth>
+                                <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://sharingiscaring-1313.firebaseio.com" provider="google"></firebase-auth>
                                 <div hidden$="{{userIsLoggedIn(statusKnown, user)}}">
                                     <p>Login mit Google:</p>
                                     <paper-button raised class="login-button" on-tap="login">
@@ -150,25 +153,23 @@
                                         <template is="dom-repeat" items="[[categories]]" as="category">
                                             <paper-item>[[category.value]]</paper-item>
                                         </template>
-                                    </paper-listbox>
-                                </paper-dropdown-menu>
-                                <template is="dom-repeat"
-                                            items="{{user.items}}"
-                                            as="item">
+            </paper-listbox>
+            </paper-dropdown-menu>
+            <template is="dom-repeat" items="{{user.items}}" as="item">
                                     <div>{{item.Title}}</div>
                                 </template>
-                            </section>
-                            <section data-route="search">
-                                Search
-                            </section>
-                            <section data-route="item">
-                                 Item
-                            </section>
-                            <section data-route="category">
-                                 Category
-                            </section>
-                        </iron-pages>
-                        <!--
+        </section>
+        <section data-route="search">
+            Search
+        </section>
+        <section data-route="item">
+            Item
+        </section>
+        <section data-route="category">
+            Category
+        </section>
+        </iron-pages>
+        <!--
                         <style>
                             google-map {
                                 height: 600px;
@@ -178,13 +179,13 @@
 
                         <p>This is a paragraph.</p>
                         -->
-                    </section>
-                </section>
-                <footer class="coolBox">
-                    (C)
-                </footer>
-            </template>
-        </section>
+    </section>
+    </section>
+    <footer class="coolBox">
+        (C)
+    </footer>
+    </template>
+    </section>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script src="/SharingIsCaring/scripts/script.js"></script>
