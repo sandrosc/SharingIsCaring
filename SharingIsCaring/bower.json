@@ -26,7 +26,6 @@
     "google-map": "GoogleWebComponents/google-map#^1.0.0",
     "vaadin-upload": "^1.0.0",
     "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#^1.1.2",
-    "firebase-element": "GoogleWebComponents/firebase-element#^1.0.12",
     "paper-button": "PolymerElements/paper-button#^1.0.11",
     "iron-image": "PolymerElements/iron-image#^1.2.3",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.2.1",
