@@ -6,24 +6,11 @@ $('paper-input-container').keypress(function (event) {
 });
 
 //Login
-app.userIsLoggedIn = function(statusKnown, user) {
-    return !statusKnown || !!user;
-}
-app.userIsLoggedOut = function(statusKnown, user) {
-    return !statusKnown || !user;
-}
 app.login = function(){
-    var params;
-    try {
-        params = JSON.parse(this.params);
-    } catch (e) {
-        params = null;
-    }
-    //this.$.firebaseLogin.login(params);
-    this.$.firebaseLogin.login(params);
+    this.$.auth.signInWithPopup();
 }
 app.logout = function() {
-    this.$.firebaseLogin.logout();
+    this.$.auth.signOut();
     page('/SharingIsCaring/login');
 }
 
