@@ -52,7 +52,7 @@
                     database-url="https://sharingiscaring-1313.firebaseio.com/"
                     api-key=" AIzaSyBjXgPYQxSmATsxM9945gmowCNuMR27mDs">
                 </firebase-app>
-                <firebase-collection data="{{categories}}" location="https://sharingiscaring-1313.firebaseio.com/categories"></firebase-collection>
+                <!--<firebase-collection data="{{categories}}" location="https://sharingiscaring-1313.firebaseio.com/categories"></firebase-collection>-->
                 <header>
                     <h1 class="logo"><a href='/SharingIsCaring'>Sharing is Caring</a></h1>
                     <section class="search coolBox">
@@ -189,7 +189,7 @@
                                             <paper-item>[[category.value]]</paper-item>
                                         </template>
             </paper-listbox>
-            </paper-dropdown-menu>F
+            </paper-dropdown-menu>
             <template is="dom-repeat" items="{{user.items}}" as="item">
                                     <div>{{item.Title}}</div>
                                 </template>
