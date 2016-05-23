@@ -23,11 +23,14 @@
       app.route = 'login';
     });
     page('/SharingIsCaring/user', function () {
-      if (app.userIsLoggedIn()){
+      if (app.user){
         app.route = 'user';
       } else {
         page.redirect('/SharingIsCaring/login');
       }
+    });
+    page('/SharingIsCaring/', function () {
+      app.route = 'home';
     });
     
     //page('/active', function () {

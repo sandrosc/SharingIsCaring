@@ -34,7 +34,7 @@
     <link rel="import" href="/SharingIsCaring/bower_components/paper-item/paper-item.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-listbox/paper-listbox.html">
     <link rel="import" href="/SharingIsCaring/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-    <link rel="import" href="/SharingIsCaring/elements/imgur-upload/imgur-upload.html">
+    <!--<link rel="import" href="/SharingIsCaring/elements/imgur-upload/imgur-upload.html">-->
     <link rel="import" href="/SharingIsCaring/bower_components/paper-button/paper-button.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/iron-icons.html">
     <link rel="import" href="/SharingIsCaring/bower_components/iron-icons/social-icons.html">
@@ -49,8 +49,8 @@
         <section id="contentBox">
             <template is="dom-bind" id="app">
                 <firebase-app auth-domain="sharingiscaring-1313.firebaseapp.com"
-                    database-url="sharingiscaring-1313.firebaseio.com/"
-                    api-key="AIzaSyDTP-eiQezleFsV2WddFBAhF_WEzx_8v_g"><!--TODO auth and database-->
+                    database-url="https://sharingiscaring-1313.firebaseio.com/"
+                    api-key=" AIzaSyBjXgPYQxSmATsxM9945gmowCNuMR27mDs">
                 </firebase-app>
                 <firebase-collection data="{{categories}}" location="https://sharingiscaring-1313.firebaseio.com/categories"></firebase-collection>
                 <header>
@@ -68,12 +68,12 @@
                             <iron-icon icon="icons:loyalty"></iron-icon>
                             Teilen
                         </a>
-                        <a class="coolBox" href="/SharingIsCaring/login" hidden$="{{userIsLoggedIn(statusKnown, user)}}">
+                        <a class="coolBox" href="/SharingIsCaring/login" hidden$="[[user]]">
                             <paper-ripple></paper-ripple>
                             <iron-icon icon="icons:account-circle"></iron-icon>
                             Einloggen
                         </a>
-                        <a class="coolBox" href="/SharingIsCaring/user" hidden$="{{userIsLoggedOut(statusKnown, user)}}">
+                        <a class="coolBox" href="/SharingIsCaring/user" hidden$="[[!user]]">
                             <paper-ripple></paper-ripple>
                             <iron-icon icon="icons:account-circle"></iron-icon>
                             User
@@ -116,33 +116,68 @@
                     <section id="right">
                         <iron-pages attr-for-selected="data-route" selected="{{route}}">
                             <section data-route="home">
-                                Home
+                                <figure class="headerImg">
+                                    <img src="img/background.png"/>
+                                    <figcaption>Leihen und Ausleihen in deiner Nähe</figcaption>
+                                </figure>
+                                <section>
+                                    <section class="left">
+                                        <h2>Neu hinzugefügt</h2>
+                                        <a href="/SharingIsCaring/item" class="item">
+                                            <iron-image src="img/items/heckenschere.png" sizing="cover"></iron-image>
+                                            <span>Heckenschere</span>
+                                            <span>in Gossau</span>
+                                        </a>
+                                        <a href="/SharingIsCaring/item" class="item">
+                                            <iron-image src="img/items/schleifmaschine.jpg" sizing="cover"></iron-image>
+                                            <span>Schleifmaschine</span>
+                                            <span>in St. Gallen</span>
+                                        </a>
+                                        <a href="/SharingIsCaring/item" class="item">
+                                            <iron-image src="img/items/bohrmaschine.jpg" sizing="cover"></iron-image>
+                                            <span>Bohrmaschine</span>
+                                            <span>in Winterthur</span>
+                                        </a>
+                                        <a href="/SharingIsCaring/item" class="item">
+                                            <iron-image src="img/items/eispickel.jpg" sizing="cover"></iron-image>
+                                            <span>Eispickel</span>
+                                            <span>in Wil</span>
+                                        </a>
+                                    </section>
+                                    <section class="right">
+                                        <h2>In deiner Nähe</h2>
+                                        <style>
+                                            google-map {
+                                                height: 300px;
+                                            }
+                                        </style>
+                                        <google-map latitude="47.4592243" longitude="9.0529177" zoom="12"></google-map>
+                                    </section>
+                                </section>
                             </section>
                             <section data-route="login">
                                 <!-- example: https://github.com/GoogleWebComponents/firebase-element/blob/master/demo/x-login.html#L72 -->
-                                <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://sharingiscaring-1313.firebaseio.com" provider="google"></firebase-auth>
-                                <div hidden$="{{userIsLoggedIn(statusKnown, user)}}">
+                                <firebase-auth id="auth" user="{{user}}" provider="google"></firebase-auth>
+                                <div hidden$="[[user]]">
                                     <p>Login mit Google:</p>
                                     <paper-button raised class="login-button" on-tap="login">
                                         <iron-icon src="/SharingIsCaring/img/googleLogin.png"></iron-icon>
                                         Login
                                     </paper-button>
                                 </div>
-                                <div hidden$="{{userIsLoggedOut(statusKnown, user)}}">
-                                    Sie wurden erfolgreich eingeloggt. Willkommen, [[user.google.displayName]].
-                                    <iron-image class="login-image" src="[[user.google.profileImageURL]]" sizing="contain"></iron-image>
+                                <div hidden$="[[!user]]">
+                                    Sie wurden erfolgreich eingeloggt. Willkommen, [[user.displayName]].
+                                    <iron-image class="login-image" src="[[user.photoURL]]" sizing="contain"></iron-image>
                                 </div>
                             </section>
                             <section data-route="user">
-                                <p>Name: [[user.google.displayName]]</p>
+                                <p>Name: [[user.displayName]]</p>
                                 <paper-button raised class="logout-button" on-tap="logout">
                                     <iron-icon icon="icons:lock"></iron-icon>
                                     Logout
                                 </paper-button>
                             </section>
                             <section data-route="share">
-                                <firebase-collection data="{{user.items}}" location="https://sharingiscaring.firebaseio.com"></firebase-collection>
-                                
                                 <p>Teile etwas:</p>
                                 
                                 <paper-input id="titleInput" label="Titel"></paper-input>
@@ -154,7 +189,7 @@
                                             <paper-item>[[category.value]]</paper-item>
                                         </template>
             </paper-listbox>
-            </paper-dropdown-menu>
+            </paper-dropdown-menu>F
             <template is="dom-repeat" items="{{user.items}}" as="item">
                                     <div>{{item.Title}}</div>
                                 </template>
@@ -163,7 +198,11 @@
             Search
         </section>
         <section data-route="item">
-            Item
+            <!--<firebase-document
+                                    path="/items/{{itemId}}"
+                                    data="{{itemData}}">
+                                </firebase-document>-->
+            <h1>[[itemData.title]]</h1>
         </section>
         <section data-route="category">
             Category
@@ -182,7 +221,10 @@
     </section>
     </section>
     <footer class="coolBox">
-        (C)
+        <a href="#">AGBs</a>
+        <a href="#">Hilfe</a>
+        <a href="#">Über uns</a>
+        <a href="#">Umweltschutz</a>
     </footer>
     </template>
     </section>

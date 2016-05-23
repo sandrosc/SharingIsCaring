@@ -25,11 +25,14 @@ header {
     margin-top: 4px;
 }
 
+h1, h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
 header > .logo {
     color: #B20000;
     display: inline-block;
-    font-family: 'Open Sans',sans-serif;
-    font-weight: 300;
     line-height: 34px;
     font-size: 30px;
     margin: 8px 0;
@@ -95,7 +98,56 @@ section#main > section {
 #right {
     flex: 1 1 auto;
     box-sizing: border-box;
-    padding: 16px;
+    padding: 10px;
+}
+
+section[data-route="home"] > section {
+    display: flex;
+    justify-content: space-between;
+}
+
+section[data-route="home"] > section > section {
+    flex: 0 0 47%;
+}
+
+.headerImg {
+    position: relative;
+    margin: 0;
+}
+
+.headerImg > img {
+    max-width: 100%;
+}
+
+.headerImg > figcaption {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 26px;
+    color: white;color: white;
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5), 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 0px 3px rgba(0, 0, 0, 0.5);
+}
+
+a.item {
+    display: inline-block;
+    width: 100%;
+    padding: 5px 0;
+    border-top: 1px rgba(0, 0, 0, 0.5) solid;
+    float: left;
+}
+
+a.item > * {
+    float: left;
+}
+
+a.item > span {
+    margin-left: 5px;
+}
+
+a.item > span + span {
+    float: right;
+    color: black;
 }
 
 a {
@@ -132,8 +184,18 @@ footer {
     float: left;
     width: 100%;
     margin: 30px 0px;
-    padding: 16px;
+    padding: 16px 20px;
     box-sizing: border-box;
+}
+
+footer a {
+    padding: 0 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+footer a:first-child {
+    padding-left: 0;
+    border-left: none;
 }
 
 .coolBox {
