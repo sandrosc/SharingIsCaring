@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Spreadyy/SharingIsCaring.git"
+    "url": "git+https://github.com/sandrosc/SharingIsCaring.git"
   },
   "author": "Sandro :D",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Spreadyy/SharingIsCaring/issues"
+    "url": "https://github.com/sandrosc/SharingIsCaring/issues"
   },
-  "homepage": "https://github.com/Spreadyy/SharingIsCaring#readme"
+  "homepage": "https://github.com/sandrosc/SharingIsCaring#readme"
 }
